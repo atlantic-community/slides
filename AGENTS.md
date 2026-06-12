@@ -34,3 +34,7 @@ All of these go through Turborepo and are cached; scope to one package with `pnp
 - Pre-commit (Husky + lint-staged): Prettier on staged files, then `turbo run lint check-types`. Tests are not run on commit — run `pnpm test` yourself before pushing.
 - The Storybook vitest project needs Playwright Chromium (`pnpm exec playwright install chromium` if browsers are missing).
 - Adding deps: `pnpm add <pkg> --filter @repo/ui` (or `-Dw` for root tooling).
+
+## Skills
+
+Project-local agent skills live in `.agents/skills/` (tracked in `skills-lock.json`, managed with `npx skills`): `turborepo` (official Vercel), `vitest`, `storybook-story-writing`, and `react-testing-library`. Consult them when working in their respective areas.
