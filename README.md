@@ -1,159 +1,70 @@
-# Turborepo starter
+# atlantic-makers-slides
 
-This Turborepo starter is maintained by the Turborepo core team.
+React component library for Atlantic Makers slides, developed in [Storybook](https://storybook.js.org/) and organized as a [Turborepo](https://turborepo.dev/) + [pnpm](https://pnpm.io/) monorepo. There are no apps yet — the library is the product for now.
 
-## Using this example
+## Requirements
 
-Run the following command:
+- Node.js >= 18
+- pnpm 10 (pinned via the `packageManager` field)
 
-```sh
-npx create-turbo@latest
-```
-
-## What's inside?
-
-This Turborepo includes the following packages/apps:
-
-### Apps and Packages
-
-- `docs`: a [Next.js](https://nextjs.org/) app
-- `web`: another [Next.js](https://nextjs.org/) app
-- `@repo/ui`: a stub React component library shared by both `web` and `docs` applications
-- `@repo/eslint-config`: `eslint` configurations (includes `eslint-config-next` and `eslint-config-prettier`)
-- `@repo/typescript-config`: `tsconfig.json`s used throughout the monorepo
-
-Each package/app is 100% [TypeScript](https://www.typescriptlang.org/).
-
-### Utilities
-
-This Turborepo has some additional tools already setup for you:
-
-- [TypeScript](https://www.typescriptlang.org/) for static type checking
-- [ESLint](https://eslint.org/) for code linting
-- [Prettier](https://prettier.io) for code formatting
-
-### Build
-
-To build all apps and packages, run the following command:
-
-With [global `turbo`](https://turborepo.dev/docs/getting-started/installation#global-installation) installed (recommended):
+## Getting started
 
 ```sh
-cd my-turborepo
-turbo build
+pnpm install
+pnpm storybook
 ```
 
-Without global `turbo`, use your package manager:
+Storybook runs at <http://localhost:6006>.
+
+## What's inside
+
+| Path                         | Package                   | Description                                                                                                           |
+| ---------------------------- | ------------------------- | --------------------------------------------------------------------------------------------------------------------- |
+| `packages/ui`                | `@repo/ui`                | The component library. Components live flat in `src/` and are imported as `@repo/ui/<name>` (e.g. `@repo/ui/button`). |
+| `packages/eslint-config`     | `@repo/eslint-config`     | Shared ESLint flat configs.                                                                                           |
+| `packages/typescript-config` | `@repo/typescript-config` | Shared `tsconfig.json` bases.                                                                                         |
+| `examples/`                  | —                         | Reference slide images used as design input; not part of the build.                                                   |
+
+## Scripts
+
+All scripts run from the repo root and go through Turborepo, so results are cached.
+
+| Command                | What it does                                             |
+| ---------------------- | -------------------------------------------------------- |
+| `pnpm storybook`       | Start the Storybook dev server                           |
+| `pnpm build-storybook` | Build static Storybook to `packages/ui/storybook-static` |
+| `pnpm test`            | Run all tests (unit + story-based browser tests)         |
+| `pnpm lint`            | ESLint with zero warnings allowed                        |
+| `pnpm check-types`     | TypeScript `--noEmit` check per package                  |
+| `pnpm format`          | Format the repo with Prettier                            |
+| `pnpm format:check`    | Verify formatting without writing                        |
+
+Scope any task to a single package with a filter: `pnpm turbo run test --filter=@repo/ui`.
+
+## Testing
+
+Vitest drives two projects inside `packages/ui`:
+
+- **`unit`** — colocated `*.test.tsx` files run in jsdom with Testing Library. Use these for logic.
+- **`storybook`** — every story runs as a browser test (headless Chromium via Playwright) through `@storybook/addon-vitest`, including `play` interaction assertions and a11y checks. Use stories for rendering and interaction coverage.
 
 ```sh
-cd my-turborepo
-npx turbo build
-pnpm dlx turbo build
-pnpm exec turbo build
+pnpm test                          # everything
+pnpm --filter @repo/ui test:unit   # unit only
+pnpm --filter @repo/ui test:storybook
 ```
 
-You can build a specific package by using a [filter](https://turborepo.dev/docs/crafting-your-repository/running-tasks#using-filters):
+If Playwright complains about missing browsers: `pnpm --filter @repo/ui exec playwright install chromium`.
 
-With [global `turbo`](https://turborepo.dev/docs/getting-started/installation#global-installation) installed:
+## Writing a component
 
-```sh
-turbo build --filter=docs
-```
+1. Add `packages/ui/src/<name>.tsx` — named export, exported props interface, lowercase filename. Components are unstyled and accept `className`.
+2. Add a colocated `<name>.stories.tsx` (CSF3 with `satisfies Meta<typeof X>`). Stories double as tests; add a `play` function only when it proves behavior a plain render doesn't.
+3. Add `<name>.test.tsx` if there is logic worth unit-testing.
+4. `pnpm test && pnpm lint && pnpm check-types`.
 
-Without global `turbo`:
+## Code quality
 
-```sh
-npx turbo build --filter=docs
-pnpm exec turbo build --filter=docs
-pnpm exec turbo build --filter=docs
-```
+Husky runs on every commit: lint-staged formats staged files with Prettier, then `turbo run lint check-types` validates the workspace (cached, typically <100ms when nothing changed). Tests don't run on commit — run `pnpm test` before pushing.
 
-### Develop
-
-To develop all apps and packages, run the following command:
-
-With [global `turbo`](https://turborepo.dev/docs/getting-started/installation#global-installation) installed (recommended):
-
-```sh
-cd my-turborepo
-turbo dev
-```
-
-Without global `turbo`, use your package manager:
-
-```sh
-cd my-turborepo
-npx turbo dev
-pnpm exec turbo dev
-pnpm exec turbo dev
-```
-
-You can develop a specific package by using a [filter](https://turborepo.dev/docs/crafting-your-repository/running-tasks#using-filters):
-
-With [global `turbo`](https://turborepo.dev/docs/getting-started/installation#global-installation) installed:
-
-```sh
-turbo dev --filter=web
-```
-
-Without global `turbo`:
-
-```sh
-npx turbo dev --filter=web
-pnpm exec turbo dev --filter=web
-pnpm exec turbo dev --filter=web
-```
-
-### Remote Caching
-
-> [!TIP]
-> Vercel Remote Cache is free for all plans. Get started today at [vercel.com](https://vercel.com/signup?utm_source=remote-cache-sdk&utm_campaign=free_remote_cache).
-
-Turborepo can use a technique known as [Remote Caching](https://turborepo.dev/docs/core-concepts/remote-caching) to share cache artifacts across machines, enabling you to share build caches with your team and CI/CD pipelines.
-
-By default, Turborepo will cache locally. To enable Remote Caching you will need an account with Vercel. If you don't have an account you can [create one](https://vercel.com/signup?utm_source=turborepo-examples), then enter the following commands:
-
-With [global `turbo`](https://turborepo.dev/docs/getting-started/installation#global-installation) installed (recommended):
-
-```sh
-cd my-turborepo
-turbo login
-```
-
-Without global `turbo`, use your package manager:
-
-```sh
-cd my-turborepo
-npx turbo login
-pnpm exec turbo login
-pnpm exec turbo login
-```
-
-This will authenticate the Turborepo CLI with your [Vercel account](https://vercel.com/docs/concepts/personal-accounts/overview).
-
-Next, you can link your Turborepo to your Remote Cache by running the following command from the root of your Turborepo:
-
-With [global `turbo`](https://turborepo.dev/docs/getting-started/installation#global-installation) installed:
-
-```sh
-turbo link
-```
-
-Without global `turbo`:
-
-```sh
-npx turbo link
-pnpm exec turbo link
-pnpm exec turbo link
-```
-
-## Useful Links
-
-Learn more about the power of Turborepo:
-
-- [Tasks](https://turborepo.dev/docs/crafting-your-repository/running-tasks)
-- [Caching](https://turborepo.dev/docs/crafting-your-repository/caching)
-- [Remote Caching](https://turborepo.dev/docs/core-concepts/remote-caching)
-- [Filtering](https://turborepo.dev/docs/crafting-your-repository/running-tasks#using-filters)
-- [Configuration Options](https://turborepo.dev/docs/reference/configuration)
-- [CLI Usage](https://turborepo.dev/docs/reference/command-line-reference)
+Conventions for both humans and coding agents live in [AGENTS.md](./AGENTS.md) (`CLAUDE.md` is a symlink to it).
