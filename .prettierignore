@@ -1,0 +1,8 @@
+node_modules
+pnpm-lock.yaml
+.turbo
+storybook-static
+coverage
+dist
+build
+examples
