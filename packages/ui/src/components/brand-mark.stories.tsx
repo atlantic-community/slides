@@ -36,5 +36,5 @@ export const Inverse: Story = {
 };
 
 export const CustomText: Story = {
-  args: { text: "Atlantic Makers\nConf 2026" },
+  args: { text: "Atlantic Community\nConf 2026" },
 };

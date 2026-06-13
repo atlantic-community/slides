@@ -14,7 +14,7 @@ type Story = StoryObj<typeof meta>;
 export const Default: Story = {
   args: {
     children: "Click me",
-    appName: "atlantic-makers-slides",
+    appName: "atlantic-community-slides",
   },
   play: async ({ canvas, userEvent, args }) => {
     const alerts: string[] = [];

@@ -29,7 +29,7 @@ type Story = StoryObj<typeof MetaBlock>;
 export const CoverContact: Story = {
   args: {
     label: "Xoana Rivas — Community Lead",
-    lines: ["Atlantic Makers", "Vigo · A Coruña · Santiago"],
+    lines: ["Atlantic Community", "Vigo · A Coruña · Santiago"],
     email: "hola@atlanticmakers.gal",
   },
 };

@@ -1,5 +1,5 @@
 {
-  "name": "@repo/ui",
+  "name": "@atlantic-community-slides/ui",
   "version": "0.0.0",
   "private": true,
   "exports": {
@@ -23,8 +23,8 @@
   },
   "devDependencies": {
     "@chromatic-com/storybook": "^5.2.1",
-    "@repo/eslint-config": "workspace:*",
-    "@repo/typescript-config": "workspace:*",
+    "@atlantic-community-slides/eslint-config": "workspace:*",
+    "@atlantic-community-slides/typescript-config": "workspace:*",
     "@storybook/addon-a11y": "^10.4.4",
     "@storybook/addon-docs": "^10.4.4",
     "@storybook/addon-mcp": "^0.6.0",

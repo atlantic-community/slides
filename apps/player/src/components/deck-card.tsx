@@ -1,6 +1,6 @@
 "use client";
 
-import { fonts } from "@repo/ui/components/tokens";
+import { fonts } from "@atlantic-community-slides/ui/components/tokens";
 import Link from "next/link";
 import { type ReactNode, useState } from "react";
 

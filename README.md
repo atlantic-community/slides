@@ -1,6 +1,6 @@
-# atlantic-makers-slides
+# atlantic-community-slides
 
-React component library for Atlantic Makers slides, developed in [Storybook](https://storybook.js.org/) and organized as a [Turborepo](https://turborepo.dev/) + [pnpm](https://pnpm.io/) monorepo. There are no apps yet — the library is the product for now.
+A React slide **design system**, the **decks** built from it, and a **player** web app that presents them — organized as a [Turborepo](https://turborepo.dev/) + [pnpm](https://pnpm.io/) monorepo. Slides are fixed 1280×720 React components; decks are authored in code; the player scales and presents them in the browser.
 
 ## Requirements
 
@@ -11,60 +11,46 @@ React component library for Atlantic Makers slides, developed in [Storybook](htt
 
 ```sh
 pnpm install
-pnpm storybook
+pnpm dev          # player app  → http://localhost:3000
+pnpm storybook    # component/layout workshop → http://localhost:6006
 ```
-
-Storybook runs at <http://localhost:6006>.
 
 ## What's inside
 
-| Path                         | Package                   | Description                                                                                                           |
-| ---------------------------- | ------------------------- | --------------------------------------------------------------------------------------------------------------------- |
-| `packages/ui`                | `@repo/ui`                | The component library. Components live flat in `src/` and are imported as `@repo/ui/<name>` (e.g. `@repo/ui/button`). |
-| `packages/eslint-config`     | `@repo/eslint-config`     | Shared ESLint flat configs.                                                                                           |
-| `packages/typescript-config` | `@repo/typescript-config` | Shared `tsconfig.json` bases.                                                                                         |
-| `examples/`                  | —                         | Reference slide images used as design input; not part of the build.                                                   |
+| Path                         | Package                                        | Description                                                                                                 |
+| ---------------------------- | ---------------------------------------------- | ----------------------------------------------------------------------------------------------------------- |
+| `apps/player`                | `player`                                       | Next.js (App Router) app. Lists decks and presents one with scale-to-fit, keyboard nav, fullscreen.         |
+| `packages/ui`                | `@atlantic-community-slides/ui`                | The design system: slide components + layout templates + tokens, developed in Storybook.                    |
+| `packages/decks`             | `@atlantic-community-slides/decks`             | Deck content (`{ meta, slides[] }`) composed from `@atlantic-community-slides/ui` layouts, plus a registry. |
+| `packages/eslint-config`     | `@atlantic-community-slides/eslint-config`     | Shared ESLint flat configs.                                                                                 |
+| `packages/typescript-config` | `@atlantic-community-slides/typescript-config` | Shared `tsconfig.json` bases.                                                                               |
+| `examples/`                  | —                                              | Reference slide images used as design input; not part of the build.                                         |
 
 ## Scripts
 
-All scripts run from the repo root and go through Turborepo, so results are cached.
+All scripts run from the repo root through Turborepo (cached). Scope to one workspace with `pnpm --filter player <script>` or `pnpm turbo run test --filter=@atlantic-community-slides/ui`.
 
-| Command                | What it does                                             |
-| ---------------------- | -------------------------------------------------------- |
-| `pnpm storybook`       | Start the Storybook dev server                           |
-| `pnpm build-storybook` | Build static Storybook to `packages/ui/storybook-static` |
-| `pnpm test`            | Run all tests (unit + story-based browser tests)         |
-| `pnpm lint`            | ESLint with zero warnings allowed                        |
-| `pnpm check-types`     | TypeScript `--noEmit` check per package                  |
-| `pnpm format`          | Format the repo with Prettier                            |
-| `pnpm format:check`    | Verify formatting without writing                        |
+| Command                             | What it does                                                        |
+| ----------------------------------- | ------------------------------------------------------------------- |
+| `pnpm dev`                          | Run dev servers (the player app on port 3000)                       |
+| `pnpm build`                        | Production build (the player app)                                   |
+| `pnpm storybook`                    | Start Storybook                                                     |
+| `pnpm build-storybook`              | Build static Storybook to `packages/ui/storybook-static`            |
+| `pnpm test`                         | All vitest projects (jsdom unit + Playwright/Chromium browser mode) |
+| `pnpm lint`                         | ESLint, zero warnings allowed                                       |
+| `pnpm check-types`                  | TypeScript `--noEmit` per package                                   |
+| `pnpm format` / `pnpm format:check` | Prettier write / check                                              |
 
-Scope any task to a single package with a filter: `pnpm turbo run test --filter=@repo/ui`.
+## Authoring a deck
+
+Decks are written in **code (TSX), not through a UI** — typically by an agent. Add `packages/decks/src/decks/<id>.tsx` exporting a `Deck` composed from `@atlantic-community-slides/ui` layouts, register it in `packages/decks/src/registry.ts`, and it appears on the player index. Full guide + layout catalog: [`packages/decks/README.md`](packages/decks/README.md).
 
 ## Testing
 
-Vitest drives two projects inside `packages/ui`:
-
-- **`unit`** — colocated `*.test.tsx` files run in jsdom with Testing Library. Use these for logic.
-- **`storybook`** — every story runs as a browser test (headless Chromium via Playwright) through `@storybook/addon-vitest`, including `play` interaction assertions and a11y checks. Use stories for rendering and interaction coverage.
-
-```sh
-pnpm test                          # everything
-pnpm --filter @repo/ui test:unit   # unit only
-pnpm --filter @repo/ui test:storybook
-```
-
-If Playwright complains about missing browsers: `pnpm --filter @repo/ui exec playwright install chromium`.
-
-## Writing a component
-
-1. Add `packages/ui/src/<name>.tsx` — named export, exported props interface, lowercase filename. Components are unstyled and accept `className`.
-2. Add a colocated `<name>.stories.tsx` (CSF3 with `satisfies Meta<typeof X>`). Stories double as tests; add a `play` function only when it proves behavior a plain render doesn't.
-3. Add `<name>.test.tsx` if there is logic worth unit-testing.
-4. `pnpm test && pnpm lint && pnpm check-types`.
+Vitest runs across the workspaces: jsdom **unit** tests (colocated `*.test.tsx`) for logic, and **browser-mode** tests (headless Chromium via Playwright) — every `@atlantic-community-slides/ui` story runs as a test, and the player has navigation/interaction tests. If Playwright is missing browsers: `pnpm exec playwright install chromium`.
 
 ## Code quality
 
-Husky runs on every commit: lint-staged formats staged files with Prettier, then `turbo run lint check-types` validates the workspace (cached, typically <100ms when nothing changed). Tests don't run on commit — run `pnpm test` before pushing.
+Husky runs on every commit: lint-staged formats staged files with Prettier, then `turbo run lint check-types` validates the workspace. Tests don't run on commit — run `pnpm test` before pushing.
 
-Conventions for both humans and coding agents live in [AGENTS.md](./AGENTS.md) (`CLAUDE.md` is a symlink to it).
+Conventions for humans and coding agents live in [AGENTS.md](./AGENTS.md) (`CLAUDE.md` is a symlink to it).

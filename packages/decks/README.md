@@ -1,9 +1,9 @@
-# @repo/decks
+# @atlantic-community-slides/decks
 
 Slide decks for the player app. **Decks are authored in code (TSX) — there is no
 deck-builder UI.** You (usually an agent) add a deck by writing a module here and
 registering it; the player app then lists and presents it. Each deck composes the
-ready-made slide layouts from `@repo/ui` — you supply content as props, the
+ready-made slide layouts from `@atlantic-community-slides/ui` — you supply content as props, the
 layouts own all positioning and styling.
 
 ## Anatomy
@@ -19,7 +19,7 @@ interface DeckMeta {
 }
 interface Deck {
   meta: DeckMeta;
-  slides: ReactNode[]; // each entry is a @repo/ui layout element
+  slides: ReactNode[]; // each entry is a @atlantic-community-slides/ui layout element
 }
 ```
 
@@ -28,9 +28,9 @@ interface Deck {
 1. **Add `src/decks/<id>.tsx`** exporting a `Deck`:
 
    ```tsx
-   import { StatementSlide } from "@repo/ui/layouts/statement-slide";
-   import { TitleBodySlide } from "@repo/ui/layouts/title-body-slide";
-   import { SlideText } from "@repo/ui/components/slide-text";
+   import { StatementSlide } from "@atlantic-community-slides/ui/layouts/statement-slide";
+   import { TitleBodySlide } from "@atlantic-community-slides/ui/layouts/title-body-slide";
+   import { SlideText } from "@atlantic-community-slides/ui/components/slide-text";
    import { brandCover } from "../shared/cover";
    import { type Deck } from "../types";
 
@@ -63,7 +63,7 @@ Notes:
 - Slides render one at a time, so React `key`s are optional, but add them on
   inline JSX slides for clarity.
 - Don't restyle layouts inline in a deck. If you need a structure no layout
-  provides, add a new layout in `@repo/ui/src/layouts/` (see the root
+  provides, add a new layout in `@atlantic-community-slides/ui/src/layouts/` (see the root
   `AGENTS.md`) and use it — keep decks to content only.
 
 ## Reuse slides across decks
@@ -93,7 +93,7 @@ Existing shared builders: `brandCover` (opening cover), `contactClosing`
 
 Layouts that take images accept `{ src, alt }`. Use real assets (imported files
 or URLs) in production. For drafts, use the deterministic SVG placeholder helpers
-from `@repo/ui/components/placeholders`:
+from `@atlantic-community-slides/ui/components/placeholders`:
 
 - `photoPlaceholder(seed?, width?, height?)` — dark photo-like fill
 - `avatarPlaceholder(initials, seed?)` — circular avatar
@@ -101,7 +101,7 @@ from `@repo/ui/components/placeholders`:
 
 ## Layout catalog
 
-Import each from `@repo/ui/layouts/<file>`. Supply content via props; layouts
+Import each from `@atlantic-community-slides/ui/layouts/<file>`. Supply content via props; layouts
 handle the brand mark, 1280×720 frame, and all styling.
 
 | File                           | Component                  | Required props                  | Optional props                                  | Use for                                   |
@@ -128,7 +128,7 @@ Shapes:
 ## Content components
 
 For props that take rich content, compose these from
-`@repo/ui/components/<file>` (every component exports its `*Props` interface):
+`@atlantic-community-slides/ui/components/<file>` (every component exports its `*Props` interface):
 
 - `slide-text` → `SlideText` `{ children, size?: "sm"|"md"|"lg", bold?, muted? }`
 - `slide-link` → `SlideLink` `{ href, children?, tone?: "blue"|"white" }` — use
@@ -141,8 +141,8 @@ For props that take rich content, compose these from
 ## Verify
 
 ```bash
-pnpm --filter @repo/decks check-types   # types
-pnpm --filter @repo/decks test          # registry integrity + smoke-renders every slide
+pnpm --filter @atlantic-community-slides/decks check-types   # types
+pnpm --filter @atlantic-community-slides/decks test          # registry integrity + smoke-renders every slide
 pnpm dev                                # play it at http://localhost:3000
 ```
 

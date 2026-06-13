@@ -14,8 +14,8 @@
     "shots": "node scripts/shots.mjs"
   },
   "dependencies": {
-    "@repo/decks": "workspace:*",
-    "@repo/ui": "workspace:*",
+    "@atlantic-community-slides/decks": "workspace:*",
+    "@atlantic-community-slides/ui": "workspace:*",
     "lucide-react": "^1.18.0",
     "next": "16.2.9",
     "react": "19.2.4",
@@ -23,8 +23,8 @@
     "screenfull": "^6.0.2"
   },
   "devDependencies": {
-    "@repo/eslint-config": "workspace:*",
-    "@repo/typescript-config": "workspace:*",
+    "@atlantic-community-slides/eslint-config": "workspace:*",
+    "@atlantic-community-slides/typescript-config": "workspace:*",
     "@testing-library/react": "^16.3.2",
     "@types/node": "^20",
     "@types/react": "^19",

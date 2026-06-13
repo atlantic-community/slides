@@ -1,5 +1,5 @@
-import { decks } from "@repo/decks";
-import { fonts } from "@repo/ui/components/tokens";
+import { decks } from "@atlantic-community-slides/decks";
+import { fonts } from "@atlantic-community-slides/ui/components/tokens";
 
 import { DeckCard } from "@/src/components/deck-card";
 

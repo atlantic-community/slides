@@ -1,5 +1,5 @@
 {
-  "name": "@repo/decks",
+  "name": "@atlantic-community-slides/decks",
   "version": "0.0.0",
   "private": true,
   "exports": {
@@ -12,8 +12,8 @@
     "test": "vitest run"
   },
   "devDependencies": {
-    "@repo/eslint-config": "workspace:*",
-    "@repo/typescript-config": "workspace:*",
+    "@atlantic-community-slides/eslint-config": "workspace:*",
+    "@atlantic-community-slides/typescript-config": "workspace:*",
     "@testing-library/react": "^16.3.2",
     "@types/react": "19.2.2",
     "@vitejs/plugin-react": "^5.0.4",
@@ -23,7 +23,7 @@
     "vitest": "^4.1.8"
   },
   "dependencies": {
-    "@repo/ui": "workspace:*",
+    "@atlantic-community-slides/ui": "workspace:*",
     "react": "^19.2.0"
   }
 }

@@ -11,6 +11,6 @@ export interface DeckMeta {
 
 export interface Deck {
   meta: DeckMeta;
-  /** Ordered slides; each is a `@repo/ui` layout instance. */
+  /** Ordered slides; each is a `@atlantic-community-slides/ui` layout instance. */
   slides: ReactNode[];
 }

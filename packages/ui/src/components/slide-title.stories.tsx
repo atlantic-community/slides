@@ -28,7 +28,7 @@ type Story = StoryObj<typeof SlideTitle>;
 
 export const SectionTitle: Story = {
   args: {
-    children: "Why sponsor Atlantic Makers?",
+    children: "Why sponsor Atlantic Community?",
   },
 };
 
@@ -41,7 +41,7 @@ export const LargeSans: Story = {
 
 export const CoverMono: Story = {
   args: {
-    children: "Atlantic Makers 2026",
+    children: "Atlantic Community 2026",
     size: "xl",
     mono: true,
   },

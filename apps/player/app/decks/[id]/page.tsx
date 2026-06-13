@@ -1,4 +1,4 @@
-import { decks, getDeck } from "@repo/decks";
+import { decks, getDeck } from "@atlantic-community-slides/decks";
 import { notFound } from "next/navigation";
 
 import { Player } from "@/src/player/player";

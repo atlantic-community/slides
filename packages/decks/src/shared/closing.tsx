@@ -1,7 +1,7 @@
 import { type ReactNode } from "react";
 
-import { BigTitleSlide } from "@repo/ui/layouts/big-title-slide";
-import { SlideLink } from "@repo/ui/components/slide-link";
+import { BigTitleSlide } from "@atlantic-community-slides/ui/layouts/big-title-slide";
+import { SlideLink } from "@atlantic-community-slides/ui/components/slide-link";
 
 export interface ContactClosingOptions {
   title: ReactNode;

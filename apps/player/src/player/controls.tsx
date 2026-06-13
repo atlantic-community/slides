@@ -1,6 +1,6 @@
 "use client";
 
-import { fonts } from "@repo/ui/components/tokens";
+import { fonts } from "@atlantic-community-slides/ui/components/tokens";
 import { ChevronLeft, ChevronRight, Maximize, Minimize } from "lucide-react";
 import {
   type CSSProperties,

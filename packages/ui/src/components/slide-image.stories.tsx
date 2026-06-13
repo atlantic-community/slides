@@ -23,7 +23,7 @@ type Story = StoryObj<typeof SlideImage>;
 export const Default: Story = {
   args: {
     src: photoPlaceholder(1, 800, 500),
-    alt: "Crowd at the Atlantic Makers meetup in Vigo",
+    alt: "Crowd at the Atlantic Community meetup in Vigo",
     width: 560,
     height: 350,
   },

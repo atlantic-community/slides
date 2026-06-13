@@ -1,18 +1,18 @@
-import { LogoGrid } from "@repo/ui/components/logo-grid";
+import { LogoGrid } from "@atlantic-community-slides/ui/components/logo-grid";
 import {
   avatarPlaceholder,
   logoPlaceholder,
   photoPlaceholder,
-} from "@repo/ui/components/placeholders";
-import { SlideLink } from "@repo/ui/components/slide-link";
-import { SlideText } from "@repo/ui/components/slide-text";
-import { LogoWallSlide } from "@repo/ui/layouts/logo-wall-slide";
-import { PeopleSlide } from "@repo/ui/layouts/people-slide";
-import { SideBySideSlide } from "@repo/ui/layouts/side-by-side-slide";
-import { StatementSlide } from "@repo/ui/layouts/statement-slide";
-import { ThreeColumnSlide } from "@repo/ui/layouts/three-column-slide";
-import { TitleBodyImageSlide } from "@repo/ui/layouts/title-body-image-slide";
-import { TitleBodyImageStackSlide } from "@repo/ui/layouts/title-body-image-stack-slide";
+} from "@atlantic-community-slides/ui/components/placeholders";
+import { SlideLink } from "@atlantic-community-slides/ui/components/slide-link";
+import { SlideText } from "@atlantic-community-slides/ui/components/slide-text";
+import { LogoWallSlide } from "@atlantic-community-slides/ui/layouts/logo-wall-slide";
+import { PeopleSlide } from "@atlantic-community-slides/ui/layouts/people-slide";
+import { SideBySideSlide } from "@atlantic-community-slides/ui/layouts/side-by-side-slide";
+import { StatementSlide } from "@atlantic-community-slides/ui/layouts/statement-slide";
+import { ThreeColumnSlide } from "@atlantic-community-slides/ui/layouts/three-column-slide";
+import { TitleBodyImageSlide } from "@atlantic-community-slides/ui/layouts/title-body-image-slide";
+import { TitleBodyImageStackSlide } from "@atlantic-community-slides/ui/layouts/title-body-image-stack-slide";
 
 import { brandCover } from "../shared/cover";
 import { contactClosing } from "../shared/closing";

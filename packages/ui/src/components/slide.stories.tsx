@@ -28,7 +28,7 @@ export const Default: Story = {
             lineHeight: 1.15,
           }}
         >
-          Why we run Atlantic Makers
+          Why we run Atlantic Community
         </h1>
         <p
           style={{
@@ -79,7 +79,7 @@ export const FullBleed: Story = {
     children: (
       <img
         src={photoPlaceholder(2, 1280, 720)}
-        alt="Crowd at an Atlantic Makers meetup"
+        alt="Crowd at an Atlantic Community meetup"
         style={{
           display: "block",
           width: "100%",

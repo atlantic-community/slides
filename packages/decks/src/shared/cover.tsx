@@ -1,6 +1,6 @@
 import { type ReactNode } from "react";
 
-import { CoverSlide } from "@repo/ui/layouts/cover-slide";
+import { CoverSlide } from "@atlantic-community-slides/ui/layouts/cover-slide";
 
 export interface BrandCoverOptions {
   title: ReactNode;
