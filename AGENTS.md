@@ -49,6 +49,21 @@ Screenshot/roast scripts (output to gitignored `screenshots/`):
 - **Foundations**: `Foundations/Design Tokens` story documents colors, type scale, and spacing.
 - **Review loop**: screenshot the UI (slides via the `@repo/ui` script against `examples/`; the player chrome via the `player` shots script, open critique with no reference), then get independent feedback from multiple models without context contamination: Claude (read the PNGs directly) and Gemini (`gemini --skip-trust -p "@gen.png <prompt>"` from a dir where the PNGs aren't gitignored, e.g. copied to `/tmp`). Codex is also available (`echo "<prompt>" | codex exec --skip-git-repo-check -s read-only -i gen.png ref.png` — `-i` is variadic, so pass the prompt via stdin). Fix issues 2+ models agree on; treat single-model scale complaints skeptically (they anchor to the references' higher pixel resolution).
 
+## Authoring decks (in code)
+
+Decks are written in **code (TSX), not through any UI** — typically by an agent.
+A deck composes the ready-made `@repo/ui` layouts; you supply content as props
+and the layouts own all styling/positioning. Full guide + layout catalog:
+[`packages/decks/README.md`](packages/decks/README.md).
+
+Workflow:
+
+1. Add `packages/decks/src/decks/<id>.tsx` exporting a `Deck` (`{ meta, slides[] }`); each slide is a `@repo/ui` layout element.
+2. Register it in `packages/decks/src/registry.ts` (`decks` array) — it then shows on the player index automatically.
+3. Verify: `pnpm --filter @repo/decks check-types && pnpm --filter @repo/decks test` (the tests smoke-render every slide), then `pnpm dev` to play it.
+
+Reuse slides across decks via **functions that return a slide** in `packages/decks/src/shared/` (e.g. `brandCover`, `contactClosing`) — import and call them from any deck. Keep decks to content only: if no layout fits, add a layout in `@repo/ui/src/layouts/`, don't restyle inline in the deck.
+
 ## Tooling notes
 
 - Pre-commit (Husky + lint-staged): Prettier on staged files, then `turbo run lint check-types`. Tests are not run on commit — run `pnpm test` yourself before pushing.
