@@ -11,6 +11,9 @@
     "test": "turbo run test",
     "storybook": "turbo run storybook",
     "build-storybook": "turbo run build-storybook",
+    "export:decks": "pnpm --filter player build && node scripts/export-decks.mjs",
+    "export:decks:images": "pnpm --filter player build && node scripts/export-decks.mjs --format images",
+    "export:decks:pdf": "pnpm --filter player build && node scripts/export-decks.mjs --format pdf",
     "prepare": "husky"
   },
   "devDependencies": {

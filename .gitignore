@@ -46,6 +46,7 @@ screenshots/
 
 # Local design references (not committed)
 examples/
+exports/
 
 # Misc
 .DS_Store

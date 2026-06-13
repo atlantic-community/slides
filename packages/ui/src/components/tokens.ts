@@ -12,11 +12,21 @@ export const slide = {
   height: 720,
   /** Outer safe-area margin used by padded layouts. */
   padding: 64,
+  /** Inner grid columns used by slide templates. */
+  gridColumns: 12,
+  /** Protected inset for projector cropping and player chrome. */
+  safeZone: 40,
 } as const;
 
 export const colors = {
   background: "#000000",
   foreground: "#ffffff",
+  primary: "#ffffff",
+  secondary: "#b3b3b3",
+  accent: "#6db3ff",
+  success: "#7adf9b",
+  warning: "#ffd166",
+  error: "#ff7a7a",
   /** Secondary body copy on the dark canvas. */
   muted: "#b3b3b3",
   /** Tertiary / fine print on the dark canvas. */
@@ -32,6 +42,15 @@ export const colors = {
   inverseMuted: "#5c5c5c",
   inverseBorder: "rgba(0, 0, 0, 0.10)",
   inverseSurface: "rgba(0, 0, 0, 0.025)",
+
+  neutral0: "#000000",
+  neutral50: "#0a0a0a",
+  neutral100: "#171717",
+  neutral200: "#2a2a2a",
+  neutral300: "#404040",
+  neutral500: "#737373",
+  neutral700: "#d4d4d4",
+  neutral900: "#ffffff",
 } as const;
 
 export const fonts = {
@@ -53,11 +72,14 @@ export const weights = {
 export const type = {
   display: 92, // cover title (mono)
   title: 64, // hero / statement title
+  subtitle: 34, // secondary slide heading
   section: 44, // section title
   heading: 24, // column + sub headings
   lead: 26, // emphasised intro copy
   body: 20, // default body copy
   caption: 16, // dense body / fine print
+  footnote: 12, // sources and disclaimers
+  code: 18, // code and terminal output
   brand: 14, // brand mark + eyebrows
 } as const;
 
@@ -70,6 +92,7 @@ export const space = {
   xl: 32,
   "2xl": 48,
   "3xl": 64,
+  "4xl": 88,
 } as const;
 
 /** Corner radii (px). */

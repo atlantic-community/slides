@@ -4,8 +4,8 @@ import { describe, expect, it } from "vitest";
 import { decks, getDeck } from "./registry";
 
 describe("deck registry", () => {
-  it("allows an empty deck registry initially", () => {
-    expect(decks.length).toBe(0);
+  it("registers available decks", () => {
+    expect(decks.length).toBeGreaterThan(0);
   });
 
   it("gives every deck a unique id", () => {
