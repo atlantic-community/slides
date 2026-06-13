@@ -3,6 +3,8 @@
   "version": "0.0.0",
   "private": true,
   "exports": {
+    "./components/*": "./src/components/*.tsx",
+    "./layouts/*": "./src/layouts/*.tsx",
     "./*": "./src/*.tsx"
   },
   "scripts": {
@@ -13,10 +15,13 @@
     "test:unit": "vitest --project unit run",
     "test:storybook": "vitest --project storybook run",
     "storybook": "storybook dev -p 6006",
-    "build-storybook": "storybook build"
+    "build-storybook": "storybook build",
+    "screenshots": "storybook build && node scripts/screenshots.mjs"
   },
   "devDependencies": {
     "@chromatic-com/storybook": "^5.2.1",
+    "@fontsource/ibm-plex-mono": "^5.2.7",
+    "@fontsource/ibm-plex-sans": "^5.2.8",
     "@repo/eslint-config": "workspace:*",
     "@repo/typescript-config": "workspace:*",
     "@storybook/addon-a11y": "^10.4.4",
