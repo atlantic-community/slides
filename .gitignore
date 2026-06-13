@@ -41,6 +41,7 @@ yarn-error.log*
 # Test artifacts
 test-results
 __screenshots__
+.vitest-attachments
 screenshots/
 
 # Misc

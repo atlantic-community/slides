@@ -3,6 +3,9 @@
   "version": "0.0.0",
   "private": true,
   "exports": {
+    "./fonts": "./src/fonts.ts",
+    "./components/tokens": "./src/components/tokens.ts",
+    "./components/placeholders": "./src/components/placeholders.ts",
     "./components/*": "./src/components/*.tsx",
     "./layouts/*": "./src/layouts/*.tsx",
     "./*": "./src/*.tsx"
@@ -20,8 +23,6 @@
   },
   "devDependencies": {
     "@chromatic-com/storybook": "^5.2.1",
-    "@fontsource/ibm-plex-mono": "^5.2.7",
-    "@fontsource/ibm-plex-sans": "^5.2.8",
     "@repo/eslint-config": "workspace:*",
     "@repo/typescript-config": "workspace:*",
     "@storybook/addon-a11y": "^10.4.4",
@@ -45,6 +46,8 @@
     "vitest": "^4.1.8"
   },
   "dependencies": {
+    "@fontsource/ibm-plex-mono": "^5.2.7",
+    "@fontsource/ibm-plex-sans": "^5.2.8",
     "react": "^19.2.0",
     "react-dom": "^19.2.0"
   }

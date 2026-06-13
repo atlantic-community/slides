@@ -1,0 +1,41 @@
+{
+  "name": "player",
+  "version": "0.1.0",
+  "private": true,
+  "scripts": {
+    "dev": "next dev",
+    "build": "next build",
+    "start": "next start",
+    "lint": "eslint . --max-warnings 0",
+    "check-types": "tsc --noEmit",
+    "test": "vitest run",
+    "test:unit": "vitest --project unit run",
+    "test:browser": "vitest --project browser run",
+    "shots": "node scripts/shots.mjs"
+  },
+  "dependencies": {
+    "@repo/decks": "workspace:*",
+    "@repo/ui": "workspace:*",
+    "lucide-react": "^1.18.0",
+    "next": "16.2.9",
+    "react": "19.2.4",
+    "react-dom": "19.2.4",
+    "screenfull": "^6.0.2"
+  },
+  "devDependencies": {
+    "@repo/eslint-config": "workspace:*",
+    "@repo/typescript-config": "workspace:*",
+    "@testing-library/react": "^16.3.2",
+    "@types/node": "^20",
+    "@types/react": "^19",
+    "@types/react-dom": "^19",
+    "@vitejs/plugin-react": "^5.2.0",
+    "@vitest/browser": "^4.1.8",
+    "@vitest/browser-playwright": "^4.1.8",
+    "eslint": "^9",
+    "jsdom": "^29.1.1",
+    "playwright": "^1.60.0",
+    "typescript": "^5",
+    "vitest": "^4.1.8"
+  }
+}
