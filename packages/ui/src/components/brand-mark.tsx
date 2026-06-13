@@ -30,7 +30,7 @@ const positionStyles: Record<BrandMarkPosition, CSSProperties> = {
 
 export function BrandMark({
   inverse = false,
-  text = "Lorem Ipsum\nCommunity",
+  text = "The Atlantic\nCommunity",
   position = "top-left",
 }: BrandMarkProps) {
   return (

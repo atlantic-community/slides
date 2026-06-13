@@ -15,8 +15,6 @@ export interface ControlsProps {
   title?: string;
   visible: boolean;
   isFullscreen: boolean;
-  atStart: boolean;
-  atEnd: boolean;
   onPrev: () => void;
   onNext: () => void;
   onToggleFullscreen: () => void;
@@ -93,8 +91,6 @@ export function Controls({
   title,
   visible,
   isFullscreen,
-  atStart,
-  atEnd,
   onPrev,
   onNext,
   onToggleFullscreen,
@@ -103,6 +99,8 @@ export function Controls({
 }: ControlsProps) {
   const [trackHover, setTrackHover] = useState(false);
   const progress = count > 0 ? ((index + 1) / count) * 100 : 0;
+  const atStart = index === 0;
+  const atEnd = index >= count - 1;
 
   const handleSeek = (event: MouseEvent<HTMLDivElement>) => {
     const rect = event.currentTarget.getBoundingClientRect();

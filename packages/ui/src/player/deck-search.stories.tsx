@@ -23,8 +23,6 @@ export const Default: Story = {
     <div
       style={{
         width: 400,
-        background: "#000",
-        padding: 32,
         color: "#fff",
         fontFamily: fonts.sans,
       }}

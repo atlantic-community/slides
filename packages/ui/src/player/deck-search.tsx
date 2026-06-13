@@ -6,35 +6,48 @@ import { Search } from "lucide-react";
 export interface DeckSearchProps {
   value: string;
   onChange: (value: string) => void;
+  placeholder?: string;
+  style?: React.CSSProperties;
 }
 
-export function DeckSearch({ value, onChange }: DeckSearchProps) {
+export function DeckSearch({
+  value,
+  onChange,
+  placeholder = "Search...",
+  style,
+}: DeckSearchProps) {
   return (
     <div
-      style={{ position: "relative", flex: 1, minWidth: 280, maxWidth: 400 }}
+      style={{
+        position: "relative",
+        display: "flex",
+        alignItems: "center",
+        border: "1px solid rgba(255,255,255,0.1)",
+        borderRadius: 8,
+        ...style,
+      }}
     >
       <Search
         size={18}
         style={{
-          position: "absolute",
-          left: 16,
-          top: "50%",
-          transform: "translateY(-50%)",
-          color: "rgba(255,255,255,0.4)",
+          marginLeft: 16,
+          color: "inherit",
+          opacity: 0.4,
+          flexShrink: 0,
         }}
       />
       <input
         type="text"
-        placeholder="Search decks by title, tags, or description..."
+        placeholder={placeholder}
         value={value}
         onChange={(e) => onChange(e.target.value)}
         style={{
+          flex: 1,
           width: "100%",
-          padding: "12px 16px 12px 44px",
-          borderRadius: 8,
-          background: "rgba(255,255,255,0.05)",
-          border: "1px solid rgba(255,255,255,0.1)",
-          color: "#fff",
+          padding: "12px 16px 12px 12px",
+          background: "transparent",
+          border: "none",
+          color: "inherit",
           fontSize: 15,
           outline: "none",
           fontFamily: fonts.sans,

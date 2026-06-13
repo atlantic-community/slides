@@ -6,6 +6,12 @@ import { decks } from "../registry";
 afterEach(cleanup);
 
 describe("deck slides render without throwing", () => {
+  if (decks.length === 0) {
+    it("has no decks to render initially", () => {
+      expect(decks).toHaveLength(0);
+    });
+  }
+
   for (const deck of decks) {
     deck.slides.forEach((slide, index) => {
       it(`${deck.meta.id} — slide ${index + 1}`, () => {

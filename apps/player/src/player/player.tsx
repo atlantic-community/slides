@@ -24,9 +24,7 @@ const IDLE_MS = 2600;
 /** Full-viewport presentation player: scaled slide + auto-hiding chrome. */
 export function Player({ slides, title }: PlayerProps) {
   const router = useRouter();
-  const { index, count, next, prev, goTo, atStart, atEnd } = useDeckNav(
-    slides.length,
-  );
+  const { index, count, next, prev, goTo } = useDeckNav(slides.length);
   const containerRef = useRef<HTMLDivElement>(null);
   const idleTimer = useRef<ReturnType<typeof setTimeout> | null>(null);
   const [isFullscreen, setIsFullscreen] = useState(false);
@@ -93,8 +91,6 @@ export function Player({ slides, title }: PlayerProps) {
         title={title}
         visible={controlsVisible}
         isFullscreen={isFullscreen}
-        atStart={atStart}
-        atEnd={atEnd}
         onPrev={prev}
         onNext={next}
         onToggleFullscreen={toggleFullscreen}

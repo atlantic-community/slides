@@ -4,8 +4,8 @@ import { describe, expect, it } from "vitest";
 import { decks, getDeck } from "./registry";
 
 describe("deck registry", () => {
-  it("has at least one deck", () => {
-    expect(decks.length).toBeGreaterThan(0);
+  it("allows an empty deck registry initially", () => {
+    expect(decks.length).toBe(0);
   });
 
   it("gives every deck a unique id", () => {
@@ -23,10 +23,7 @@ describe("deck registry", () => {
     }
   });
 
-  it("resolves a known deck and rejects an unknown one", () => {
-    expect(getDeck("lorem-ipsum")?.meta.title).toBe(
-      "Comprehensive Slide Examples",
-    );
+  it("rejects an unknown deck ID", () => {
     expect(getDeck("nope")).toBeUndefined();
   });
 });

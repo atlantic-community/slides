@@ -7,6 +7,7 @@ import Fuse from "fuse.js";
 import Link from "next/link";
 
 import { DeckCard } from "@atlantic-community-slides/ui/player/deck-card";
+import { DeckEmpty } from "@atlantic-community-slides/ui/player/deck-empty";
 import { DeckSearch } from "@atlantic-community-slides/ui/player/deck-search";
 
 export default function Home() {
@@ -94,7 +95,17 @@ export default function Home() {
             marginTop: 24,
           }}
         >
-          <DeckSearch value={search} onChange={setSearch} />
+          <DeckSearch
+            value={search}
+            onChange={setSearch}
+            placeholder="Search decks by title, tags, or description..."
+            style={{
+              flex: 1,
+              minWidth: 280,
+              maxWidth: 400,
+              background: "rgba(255,255,255,0.05)",
+            }}
+          />
         </div>
       </header>
 
@@ -106,9 +117,7 @@ export default function Home() {
         }}
       >
         {filteredAndSortedDecks.length === 0 ? (
-          <div style={{ color: "rgba(255,255,255,0.4)", fontSize: 15 }}>
-            No decks found matching your criteria.
-          </div>
+          <DeckEmpty />
         ) : (
           filteredAndSortedDecks.map((deck) => (
             <DeckCard

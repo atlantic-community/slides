@@ -20,8 +20,6 @@ export const Default: Story = {
     title: "Example Presentation",
     visible: true,
     isFullscreen: false,
-    atStart: true,
-    atEnd: false,
     onPrev: () => console.log("prev"),
     onNext: () => console.log("next"),
     onToggleFullscreen: () => console.log("fullscreen"),

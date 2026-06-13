@@ -1,6 +1,5 @@
 import type { Meta, StoryObj } from "@storybook/react-vite";
 import { DeckCard } from "./deck-card";
-import { SlideText } from "../components/slide-text";
 import { fonts } from "../components/tokens";
 
 const meta = {
@@ -30,9 +29,10 @@ export const Default: Story = {
           width: "100%",
           height: "100%",
           background: "#111",
+          color: "#fff",
         }}
       >
-        <SlideText size="md">Slide Preview</SlideText>
+        <div style={{ fontSize: 24 }}>Slide Preview</div>
       </div>
     ),
   },
