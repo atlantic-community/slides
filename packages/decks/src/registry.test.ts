@@ -24,9 +24,9 @@ describe("deck registry", () => {
   });
 
   it("resolves a known deck and rejects an unknown one", () => {
-    expect(getDeck("atlantic-community")?.meta.title).toBe(
-      "The Atlantic Community",
+    expect(getDeck("lorem-ipsum")?.meta.title).toBe(
+      "Comprehensive Slide Examples",
     );
-    expect(getDeck("does-not-exist")).toBeUndefined();
+    expect(getDeck("nope")).toBeUndefined();
   });
 });

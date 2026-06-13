@@ -29,16 +29,22 @@ export function CoverSlide({
 
   return (
     <Slide brand={false}>
-      <SlideTitle size="xl" mono style={{ marginTop: 106, maxWidth: "75%" }}>
+      <SlideTitle
+        key="title"
+        size="xl"
+        mono
+        style={{ marginTop: 106, maxWidth: "75%" }}
+      >
         {title}
       </SlideTitle>
       {subtitle ? (
-        <SlideText size="md" style={{ marginTop: 36 }}>
+        <SlideText key="subtitle" size="md" style={{ marginTop: 36 }}>
           {subtitle}
         </SlideText>
       ) : null}
       {hasMeta ? (
         <MetaBlock
+          key="meta"
           label={metaLabel}
           lines={metaLines}
           email={email}

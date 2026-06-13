@@ -17,7 +17,7 @@ type Story = StoryObj<typeof ThreeColumnSlide>;
 
 export const OurEvents: Story = {
   args: {
-    title: "Nuestros eventos",
+    title: "Lorem Ipsum Title",
     columns: [
       {
         heading: "GUADEC/Akademy/XDC",

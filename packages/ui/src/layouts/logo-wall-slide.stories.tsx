@@ -28,7 +28,7 @@ const supporters = [
 
 export const Supporters: Story = {
   args: {
-    title: "Entidades que apoyan esta propuesta",
+    title: "Lorem Ipsum Title",
     logos: supporters,
   },
 };

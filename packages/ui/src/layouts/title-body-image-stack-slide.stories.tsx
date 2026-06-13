@@ -17,7 +17,7 @@ type Story = StoryObj<typeof TitleBodyImageStackSlide>;
 
 export const Hackathon: Story = {
   args: {
-    title: "1hack",
+    title: "Lorem Ipsum Title",
     link: <SlideLink href="https://hackudc.gpul.org" tone="white" />,
     images: [
       { src: photoPlaceholder(0, 800, 500), alt: "Hackathon venue at night" },
@@ -31,17 +31,20 @@ export const Hackathon: Story = {
           Top-tier sponsors
         </SlideText>
         <SlideText size="sm" muted>
-          Attract professionals and top sponsors from outside Galicia.
+          Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do
+          eiusmod tempor incididunt ut labore et dolore magna aliqua.
         </SlideText>
         <SlideText size="sm" muted>
-          The big sibling of HackUDC: the largest hackathon in Spain and one of
-          the largest in Europe.
+          Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do
+          eiusmod tempor incididunt ut labore et dolore magna aliqua.
         </SlideText>
         <SlideText size="sm" muted>
-          A hackathon aimed at professionals and entrepreneurship.
+          Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do
+          eiusmod tempor incididunt ut labore et dolore magna aliqua.
         </SlideText>
         <SlideText size="sm" muted>
-          Theme: AI. Teams will come to do real AI R&D.
+          Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do
+          eiusmod tempor incididunt ut labore et dolore magna aliqua.
         </SlideText>
       </>
     ),
@@ -50,7 +53,7 @@ export const Hackathon: Story = {
 
 export const TechExpo: Story = {
   args: {
-    title: "Atlántica Tech Expo",
+    title: "Lorem Ipsum Title",
     link: (
       <div style={{ display: "flex", flexDirection: "column", gap: 6 }}>
         <SlideLink href="https://vds.tech" />
@@ -70,19 +73,20 @@ export const TechExpo: Story = {
     children: (
       <>
         <SlideText size="sm" bold>
-          10,000 attendees
+          Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do
+          eiusmod tempor incididunt ut labore et dolore magna aliqua.
         </SlideText>
         <SlideText size="sm" muted>
-          Mission: grow Galicia&apos;s GDP without depending on the Camino de
-          Santiago or on building cars.
+          Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do
+          eiusmod tempor incididunt ut labore et dolore magna aliqua.
         </SlideText>
         <SlideText size="sm" muted>
-          Connect investors with startups. Connect corporates with startups.
-          Help institutions get to know the sector.
+          Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do
+          eiusmod tempor incididunt ut labore et dolore magna aliqua.
         </SlideText>
         <SlideText size="sm" muted>
-          A space to give visibility to Galician tech companies and bring
-          technology closer to society and students.
+          Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do
+          eiusmod tempor incididunt ut labore et dolore magna aliqua.
         </SlideText>
       </>
     ),

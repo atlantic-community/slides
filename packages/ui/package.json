@@ -8,6 +8,7 @@
     "./components/placeholders": "./src/components/placeholders.ts",
     "./components/*": "./src/components/*.tsx",
     "./layouts/*": "./src/layouts/*.tsx",
+    "./player/*": "./src/player/*.tsx",
     "./*": "./src/*.tsx"
   },
   "scripts": {
@@ -22,9 +23,9 @@
     "screenshots": "storybook build && node scripts/screenshots.mjs"
   },
   "devDependencies": {
-    "@chromatic-com/storybook": "^5.2.1",
     "@atlantic-community-slides/eslint-config": "workspace:*",
     "@atlantic-community-slides/typescript-config": "workspace:*",
+    "@chromatic-com/storybook": "^5.2.1",
     "@storybook/addon-a11y": "^10.4.4",
     "@storybook/addon-docs": "^10.4.4",
     "@storybook/addon-mcp": "^0.6.0",
@@ -48,6 +49,7 @@
   "dependencies": {
     "@fontsource/ibm-plex-mono": "^5.2.7",
     "@fontsource/ibm-plex-sans": "^5.2.8",
+    "lucide-react": "^1.18.0",
     "react": "^19.2.0",
     "react-dom": "^19.2.0"
   }

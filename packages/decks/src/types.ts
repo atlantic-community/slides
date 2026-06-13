@@ -5,8 +5,10 @@ export interface DeckMeta {
   id: string;
   title: string;
   subtitle?: string;
+  description?: string;
   /** Display date, e.g. "June 2026". */
   date: string;
+  tags?: string[];
 }
 
 export interface Deck {

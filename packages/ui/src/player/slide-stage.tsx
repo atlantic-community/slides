@@ -1,6 +1,6 @@
 "use client";
 
-import { slide } from "@atlantic-community-slides/ui/components/tokens";
+import { slide } from "../components/tokens";
 import { type ReactNode, useRef } from "react";
 
 import { useScaleToFit } from "./use-scale-to-fit";

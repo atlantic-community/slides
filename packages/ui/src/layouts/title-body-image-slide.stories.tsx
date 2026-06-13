@@ -16,7 +16,7 @@ type Story = StoryObj<typeof meta>;
 
 export const Default: Story = {
   args: {
-    title: "Galician european tech hub",
+    title: "Lorem Ipsum Title",
     image: {
       src: photoPlaceholder(3),
       alt: "Atlantic Community meetup group photo outside the venue",
@@ -24,24 +24,24 @@ export const Default: Story = {
     children: (
       <>
         <SlideText size="sm">
-          We have enormous talent and great education, nothing to envy other
-          ecosystems around the world.
+          Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do
+          eiusmod tempor incididunt ut labore et dolore magna aliqua.
         </SlideText>
         <SlideText size="sm">
-          In Galicia we build world-class things, both as companies and as
-          professionals. Let&apos;s believe it and tell the world.
+          Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do
+          eiusmod tempor incididunt ut labore et dolore magna aliqua.
         </SlideText>
         <SlideText size="sm">
-          Connect that talent to generate business and investment. And attract
-          more of it from outside.
+          Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do
+          eiusmod tempor incididunt ut labore et dolore magna aliqua.
         </SlideText>
         <SlideText size="sm">
-          Lead by doing things with high quality and purpose: tech sovereignty,
-          open source AI, and more.
+          Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do
+          eiusmod tempor incididunt ut labore et dolore magna aliqua.
         </SlideText>
         <SlideText size="sm">
-          The future of our kids, wherever it happens, should never lack a path
-          back home to build great things.
+          Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do
+          eiusmod tempor incididunt ut labore et dolore magna aliqua.
         </SlideText>
       </>
     ),

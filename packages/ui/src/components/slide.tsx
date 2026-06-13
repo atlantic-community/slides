@@ -1,12 +1,12 @@
 import { type CSSProperties, type ReactNode } from "react";
 
-import { BrandMark } from "./brand-mark";
+import { BrandMark, type BrandMarkPosition } from "./brand-mark";
 import { colors, fonts, slide } from "./tokens";
 
 export interface SlideProps {
   children: ReactNode;
-  /** Show the brand mark in the top-left corner. */
-  brand?: boolean;
+  /** Show the brand mark. Can be a boolean or a specific position. */
+  brand?: boolean | BrandMarkPosition;
   /** White background with black text instead of the default black/white. */
   inverse?: boolean;
   /** Apply the standard 64px slide padding. Disable for full-bleed layouts. */
@@ -41,7 +41,12 @@ export function Slide({
         ...style,
       }}
     >
-      {brand ? <BrandMark inverse={inverse} /> : null}
+      {brand ? (
+        <BrandMark
+          inverse={inverse}
+          position={typeof brand === "string" ? brand : undefined}
+        />
+      ) : null}
       {children}
     </section>
   );

@@ -28,15 +28,15 @@ type Story = StoryObj<typeof MetaBlock>;
 
 export const CoverContact: Story = {
   args: {
-    label: "Xoana Rivas — Community Lead",
+    label: "Lorem Ipsum",
     lines: ["Atlantic Community", "Vigo · A Coruña · Santiago"],
-    email: "hola@atlanticmakers.gal",
+    email: "email@example.com",
   },
 };
 
 export const EventDetails: Story = {
   args: {
-    label: "Sponsor Day 2026",
+    label: "Lorem Ipsum",
     lines: [
       "Thursday, 24 September",
       "Cidade da Cultura, Santiago de Compostela",

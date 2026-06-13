@@ -29,7 +29,7 @@ type Story = StoryObj<typeof meta>;
 export const Default: Story = {
   args: {
     value: "350+",
-    label: "Attendees per edition",
+    label: "Lorem Ipsum",
     description: "Developers, designers and founders from across Galicia.",
   },
 };
@@ -43,6 +43,6 @@ export const ValueOnly: Story = {
 export const WithLabel: Story = {
   args: {
     value: "92%",
-    label: "Would come back",
+    label: "Lorem Ipsum",
   },
 };

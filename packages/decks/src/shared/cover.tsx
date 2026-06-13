@@ -3,6 +3,7 @@ import { type ReactNode } from "react";
 import { CoverSlide } from "@atlantic-community-slides/ui/layouts/cover-slide";
 
 export interface BrandCoverOptions {
+  key?: string;
   title: ReactNode;
   subtitle?: ReactNode;
   location?: string;
@@ -14,6 +15,7 @@ export interface BrandCoverOptions {
  * shared "Dossier" meta block convention.
  */
 export function brandCover({
+  key = "cover",
   title,
   subtitle,
   location,
@@ -21,6 +23,7 @@ export function brandCover({
 }: BrandCoverOptions): ReactNode {
   return (
     <CoverSlide
+      key={key}
       title={title}
       subtitle={subtitle}
       metaLabel="Dossier"

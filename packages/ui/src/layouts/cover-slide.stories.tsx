@@ -15,16 +15,16 @@ type Story = StoryObj<typeof meta>;
 
 export const Dossier: Story = {
   args: {
-    title: "The Atlantic Community",
-    subtitle: "Making Galicia the next European tech hub",
-    metaLabel: "Dossier",
-    metaLines: ["A Coruña, Spain"],
-    email: "sponsor@1hack.eu",
+    title: "Lorem Ipsum Title",
+    subtitle: "Lorem ipsum dolor sit amet, consectetur adipiscing elit.",
+    metaLabel: "Label",
+    metaLines: ["Line 1", "Line 2"],
+    email: "email@example.com",
   },
 };
 
 export const TitleOnly: Story = {
   args: {
-    title: "1HackAway 2026",
+    title: "Lorem Ipsum Title",
   },
 };

@@ -1,6 +1,7 @@
 "use client";
 
 import screenfull from "screenfull";
+import { useRouter } from "next/navigation";
 import {
   type ReactNode,
   useCallback,
@@ -9,8 +10,8 @@ import {
   useState,
 } from "react";
 
-import { Controls } from "./controls";
-import { SlideStage } from "./slide-stage";
+import { Controls } from "@atlantic-community-slides/ui/player/controls";
+import { SlideStage } from "@atlantic-community-slides/ui/player/slide-stage";
 import { useDeckNav } from "./use-deck-nav";
 
 export interface PlayerProps {
@@ -22,6 +23,7 @@ const IDLE_MS = 2600;
 
 /** Full-viewport presentation player: scaled slide + auto-hiding chrome. */
 export function Player({ slides, title }: PlayerProps) {
+  const router = useRouter();
   const { index, count, next, prev, goTo, atStart, atEnd } = useDeckNav(
     slides.length,
   );
@@ -47,6 +49,10 @@ export function Player({ slides, title }: PlayerProps) {
       if (event.key === "f" || event.key === "F") {
         event.preventDefault();
         toggleFullscreen();
+      }
+      if (event.key === "Escape") {
+        // Handled natively by browsers for full screen, but we might want to exit?
+        // Let's just rely on the UI button or standard browser behavior.
       }
     };
     window.addEventListener("keydown", onKey);
@@ -93,6 +99,7 @@ export function Player({ slides, title }: PlayerProps) {
         onNext={next}
         onToggleFullscreen={toggleFullscreen}
         onSeek={(fraction) => goTo(Math.round(fraction * (count - 1)))}
+        onExit={() => router.push("/")}
       />
     </div>
   );

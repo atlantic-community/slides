@@ -16,7 +16,7 @@ type Story = StoryObj<typeof BigTitleSlide>;
 
 export const Default: Story = {
   args: {
-    title: "Galicia, the next european tech hub",
+    title: "Lorem Ipsum Title",
     footer: (
       <SlideLink href="mailto:sponsor@1hack.eu" tone="white">
         sponsor@1hack.eu
@@ -27,6 +27,6 @@ export const Default: Story = {
 
 export const WithoutFooter: Story = {
   args: {
-    title: "Let's build it together",
+    title: "Lorem Ipsum Title",
   },
 };

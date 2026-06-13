@@ -16,13 +16,17 @@ export function BigTitleSlide({ title, footer }: BigTitleSlideProps) {
   return (
     <Slide>
       <SlideTitle
+        key="title"
         size="lg"
         style={{ marginTop: 110, marginLeft: 40, maxWidth: "58%" }}
       >
         {title}
       </SlideTitle>
       {footer ? (
-        <div style={{ marginTop: "auto", marginBottom: 72, marginLeft: 40 }}>
+        <div
+          key="footer"
+          style={{ marginTop: "auto", marginBottom: 72, marginLeft: 40 }}
+        >
           {footer}
         </div>
       ) : null}

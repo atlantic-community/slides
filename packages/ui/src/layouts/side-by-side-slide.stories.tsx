@@ -38,19 +38,16 @@ const sponsorLogos = sponsorNames.map((name, i) => ({
 
 export const SponsorWall: Story = {
   args: {
-    title: "Sponsors internacionales que ya han confiado en nosotros",
+    title: "Lorem Ipsum Title",
     body: (
       <div style={{ display: "flex", flexDirection: "column", gap: 20 }}>
         <SlideText size="sm">
-          Estos son algunos de los sponsors que han trabajado con nosotros en
-          los diferentes eventos, tanto locales como de diferentes comunidades
-          open source globales como Gnome, KDE o la X.org Foundation, que hemos
-          organizado.
+          Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do
+          eiusmod tempor incididunt ut labore et dolore magna aliqua.
         </SlideText>
         <SlideText size="sm">
-          Eventos con los mejores profesionales del mundo, organizados en
-          ediciones anteriores en lugares como las oficinas principales de
-          Google en Mountain View, y que conseguimos atraer a Galicia.
+          Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do
+          eiusmod tempor incididunt ut labore et dolore magna aliqua.
         </SlideText>
       </div>
     ),

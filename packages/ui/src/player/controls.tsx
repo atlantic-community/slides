@@ -1,7 +1,7 @@
 "use client";
 
-import { fonts } from "@atlantic-community-slides/ui/components/tokens";
-import { ChevronLeft, ChevronRight, Maximize, Minimize } from "lucide-react";
+import { fonts } from "../components/tokens";
+import { ChevronLeft, ChevronRight, Maximize, Minimize, X } from "lucide-react";
 import {
   type CSSProperties,
   type MouseEvent,
@@ -22,6 +22,8 @@ export interface ControlsProps {
   onToggleFullscreen: () => void;
   /** Jump to a fraction (0–1) of the deck via the progress bar. */
   onSeek: (fraction: number) => void;
+  /** Exit the player and return to index */
+  onExit: () => void;
 }
 
 function IconButton({
@@ -41,7 +43,7 @@ function IconButton({
       type="button"
       aria-label={label}
       onClick={onClick}
-      disabled={disabled}
+      disabled={disabled || undefined}
       onMouseEnter={() => setHover(true)}
       onMouseLeave={() => setHover(false)}
       style={{
@@ -97,6 +99,7 @@ export function Controls({
   onNext,
   onToggleFullscreen,
   onSeek,
+  onExit,
 }: ControlsProps) {
   const [trackHover, setTrackHover] = useState(false);
   const progress = count > 0 ? ((index + 1) / count) * 100 : 0;
@@ -119,17 +122,23 @@ export function Controls({
         }}
       >
         <div
-          style={{
-            flex: 1,
-            fontSize: 13,
-            letterSpacing: 0.2,
-            color: "rgba(255,255,255,0.55)",
-            whiteSpace: "nowrap",
-            overflow: "hidden",
-            textOverflow: "ellipsis",
-          }}
+          style={{ flex: 1, display: "flex", alignItems: "center", gap: 12 }}
         >
-          {title}
+          <IconButton label="Exit presentation" onClick={onExit}>
+            <X size={20} strokeWidth={2} />
+          </IconButton>
+          <div
+            style={{
+              fontSize: 13,
+              letterSpacing: 0.2,
+              color: "rgba(255,255,255,0.55)",
+              whiteSpace: "nowrap",
+              overflow: "hidden",
+              textOverflow: "ellipsis",
+            }}
+          >
+            {title}
+          </div>
         </div>
 
         <div style={{ display: "flex", alignItems: "center", gap: 10 }}>
