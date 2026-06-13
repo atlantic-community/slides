@@ -71,4 +71,6 @@ Reuse slides across decks via **functions that return a slide** in `packages/dec
 
 ## Skills
 
-Project-local agent skills live in `.agents/skills/` (tracked in `skills-lock.json`, managed with `npx skills`): `turborepo` (official Vercel), `vitest`, `storybook-story-writing`, and `react-testing-library`. Consult them when working in their respective areas.
+Project-local agent skills live in `.agents/skills/` (tracked in `skills-lock.json`, managed with `npx skills`): `turborepo` (official Vercel), `vitest`, `storybook-story-writing`, `react-testing-library`, and `caveman`. Consult them when working in their respective areas.
+
+Always use the `caveman` skill in this repo unless the user explicitly says `stop caveman` or `normal mode`.

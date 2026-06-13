@@ -17,7 +17,7 @@ export function Slide({
   inverse = false,
   padded = true,
   brand,
-  brandPosition = "top-left",
+  brandPosition = "top-right",
   style,
 }: SlideProps) {
   return (
@@ -198,9 +198,9 @@ export interface PlaceholderVisualProps {
 
 const visualBackgrounds = [
   `linear-gradient(135deg, ${colors.neutral100}, ${colors.neutral300})`,
-  `linear-gradient(135deg, ${colors.neutral50}, ${colors.primary})`,
-  `linear-gradient(135deg, ${colors.neutral200}, ${colors.accent})`,
-  `linear-gradient(135deg, ${colors.neutral100}, ${colors.success})`,
+  `linear-gradient(135deg, ${colors.neutral50}, ${colors.neutral200})`,
+  `linear-gradient(135deg, ${colors.neutral100}, ${colors.neutral500})`,
+  `linear-gradient(135deg, ${colors.neutral200}, ${colors.neutral700})`,
 ] as const;
 
 export function PlaceholderVisual({
@@ -229,8 +229,8 @@ export function PlaceholderVisual({
       <div
         style={{
           position: "absolute",
-          inset: 0,
-          opacity: 0.26,
+          inset: variant === "qr" ? space.md : 0,
+          opacity: variant === "video" ? 0.18 : 0.26,
           backgroundImage:
             variant === "qr"
               ? `linear-gradient(90deg, ${colors.foreground} 10px, transparent 10px), linear-gradient(${colors.foreground} 10px, transparent 10px)`
@@ -238,19 +238,91 @@ export function PlaceholderVisual({
           backgroundSize: variant === "qr" ? "34px 34px" : "80px 80px",
         }}
       />
-      <div
-        style={{
-          position: "absolute",
-          left: space.lg,
-          bottom: space.lg,
-          fontFamily: fonts.mono,
-          fontSize: type.caption,
-          fontWeight: weights.bold,
-          textTransform: "uppercase",
-        }}
-      >
-        {label ?? variant}
-      </div>
+      {variant === "video" ? (
+        <div
+          style={{
+            position: "absolute",
+            inset: 0,
+            display: "grid",
+            placeItems: "center",
+          }}
+        >
+          <div
+            style={{
+              width: 92,
+              height: 92,
+              borderRadius: 999,
+              border: `2px solid ${colors.foreground}`,
+              display: "grid",
+              placeItems: "center",
+              background: "rgba(0, 0, 0, 0.35)",
+            }}
+          >
+            <div
+              style={{
+                width: 0,
+                height: 0,
+                borderTop: "18px solid transparent",
+                borderBottom: "18px solid transparent",
+                borderLeft: `28px solid ${colors.foreground}`,
+                marginLeft: 8,
+              }}
+            />
+          </div>
+        </div>
+      ) : null}
+      {variant === "screenshot" ? (
+        <div
+          style={{
+            position: "absolute",
+            top: space.md,
+            left: space.md,
+            right: space.md,
+            height: 30,
+            display: "flex",
+            alignItems: "center",
+            gap: space.sm,
+            opacity: 0.8,
+          }}
+        >
+          {[0, 1, 2].map((item) => (
+            <span
+              key={item}
+              style={{
+                width: 8,
+                height: 8,
+                borderRadius: 999,
+                background: colors.foreground,
+                opacity: 0.55,
+              }}
+            />
+          ))}
+          <span
+            style={{
+              flex: 1,
+              height: 8,
+              borderRadius: 999,
+              background: colors.foreground,
+              opacity: 0.16,
+            }}
+          />
+        </div>
+      ) : null}
+      {label !== null ? (
+        <div
+          style={{
+            position: "absolute",
+            left: space.lg,
+            bottom: space.lg,
+            fontFamily: fonts.mono,
+            fontSize: type.caption,
+            fontWeight: weights.bold,
+            textTransform: "uppercase",
+          }}
+        >
+          {label ?? variant}
+        </div>
+      ) : null}
     </div>
   );
 }

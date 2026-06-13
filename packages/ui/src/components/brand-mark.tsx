@@ -15,8 +15,8 @@ export interface BrandMarkProps {
 }
 
 const positionStyles: Record<BrandMarkPosition, CSSProperties> = {
-  "top-left": { top: 40, left: slide.padding, textAlign: "left" },
-  "top-right": { top: 40, right: slide.padding, textAlign: "right" },
+  "top-left": { top: 28, left: slide.safeZone, textAlign: "left" },
+  "top-right": { top: 28, right: slide.safeZone, textAlign: "right" },
   "bottom-left": { bottom: 40, left: slide.padding, textAlign: "left" },
   "bottom-right": { bottom: 40, right: slide.padding, textAlign: "right" },
   center: {

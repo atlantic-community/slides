@@ -111,6 +111,7 @@ export function Controls({
   return (
     <>
       <div
+        data-testid="player-control-bar"
         style={{
           ...bar,
           opacity: visible ? 1 : 0,
@@ -179,6 +180,7 @@ export function Controls({
       </div>
 
       <div
+        data-testid="slide-progress"
         role="slider"
         aria-label="Slide progress"
         aria-valuemin={1}

@@ -5,12 +5,11 @@
  * Usage:
  *   pnpm export:decks
  *   pnpm export:decks -- --format images
- *   pnpm export:decks -- --format pdf --deck mock-design-system
  *   pnpm export:decks -- --force
  */
 import { createServer } from "node:http";
 import { createRequire } from "node:module";
-import { access, mkdir, readFile, rm, stat, writeFile } from "node:fs/promises";
+import { access, mkdir, readFile, stat, writeFile } from "node:fs/promises";
 import { extname, join, normalize, relative, resolve, sep } from "node:path";
 import process from "node:process";
 import { fileURLToPath } from "node:url";
@@ -19,7 +18,6 @@ const repoRoot = fileURLToPath(new URL("..", import.meta.url));
 const appRoot = join(repoRoot, "apps/player");
 const staticRoot = join(appRoot, "out");
 const defaultOutDir = join(repoRoot, "exports");
-const tmpDir = join(repoRoot, "exports", ".tmp");
 const slideWidth = 1280;
 const slideHeight = 720;
 const requireFromPlayer = createRequire(join(appRoot, "package.json"));
@@ -42,7 +40,7 @@ const mimeTypes = {
 function parseArgs(argv) {
   const options = {
     decks: [],
-    format: "all",
+    format: "images",
     force: false,
     outDir: defaultOutDir,
     port: 4387,
@@ -59,8 +57,8 @@ function parseArgs(argv) {
       i += 1;
     } else if (arg === "--format") {
       const value = argv[i + 1];
-      if (!["all", "images", "pdf"].includes(value)) {
-        throw new Error("--format must be one of: all, images, pdf");
+      if (value !== "images") {
+        throw new Error("--format must be images");
       }
       options.format = value;
       i += 1;
@@ -91,14 +89,14 @@ function printHelp() {
 
 Options:
   --deck <id>        Export one deck. Repeat to export several. Default: all decks.
-  --format <format>  all, images, or pdf. Default: all.
+  --format <format>  images. Default: images.
   --out <folder>     Output folder. Default: ./exports.
-  --force            Recreate existing images/PDFs. Default: skip existing outputs.
+  --force            Recreate existing images. Default: skip existing outputs.
   --port <port>      Local static server port. Default: 4387.
 
 Examples:
   pnpm export:decks
-  pnpm export:decks -- --deck mock-design-system --format pdf
+  pnpm export:decks -- --deck mock-design-system
   pnpm export:decks -- --format images --force
 `);
 }
@@ -214,65 +212,29 @@ async function captureSlides({
     await page.locator('[data-testid="slide-surface"]').waitFor({
       state: "visible",
     });
-    await page.locator('[data-testid="slide-surface"]').screenshot({
-      path: imagePath,
+    await page.locator('[data-testid="slide-progress"]').waitFor({
+      state: "visible",
     });
+    await page.locator('[data-testid="player-control-bar"]').evaluate((bar) => {
+      bar.style.display = "none";
+      bar.style.opacity = "0";
+      bar.style.pointerEvents = "none";
+    });
+    await page.locator('[data-testid="slide-progress"]').evaluate((track) => {
+      track.style.height = "5px";
+    });
+    await page.waitForFunction(() => {
+      const bar = document.querySelector('[data-testid="player-control-bar"]');
+      const progress = document.querySelector('[data-testid="slide-progress"]');
+      if (!bar || !progress) return false;
+      const barStyle = window.getComputedStyle(bar);
+      const progressStyle = window.getComputedStyle(progress);
+      return barStyle.display === "none" && progressStyle.height === "5px";
+    });
+    await page.screenshot({ path: imagePath });
   }
 
   return imagePaths;
-}
-
-async function writePdf({ page, pdfPath, imagePaths, force }) {
-  if (!force && (await exists(pdfPath))) return false;
-
-  const pages = await Promise.all(
-    imagePaths.map(async (imagePath) => {
-      const image = await readFile(imagePath);
-      return `<section class="slide"><img src="data:image/png;base64,${image.toString("base64")}" /></section>`;
-    }),
-  );
-
-  await page.setContent(
-    `<!doctype html>
-<html>
-  <head>
-    <meta charset="utf-8" />
-    <style>
-      @page { size: ${slideWidth}px ${slideHeight}px; margin: 0; }
-      html, body { margin: 0; padding: 0; background: #000; }
-      .slide {
-        width: ${slideWidth}px;
-        height: ${slideHeight}px;
-        page-break-after: always;
-        break-after: page;
-        overflow: hidden;
-        background: #000;
-      }
-      .slide:last-child {
-        page-break-after: auto;
-        break-after: auto;
-      }
-      img {
-        display: block;
-        width: ${slideWidth}px;
-        height: ${slideHeight}px;
-      }
-    </style>
-  </head>
-  <body>${pages.join("")}</body>
-</html>`,
-    { waitUntil: "load" },
-  );
-  await page.pdf({
-    path: pdfPath,
-    printBackground: true,
-    preferCSSPageSize: true,
-    width: `${slideWidth}px`,
-    height: `${slideHeight}px`,
-    margin: { top: 0, right: 0, bottom: 0, left: 0 },
-  });
-
-  return true;
 }
 
 async function main() {
@@ -296,7 +258,7 @@ async function main() {
     browser = await chromium.launch();
     const page = await browser.newPage({
       viewport: { width: slideWidth, height: slideHeight },
-      deviceScaleFactor: 1,
+      deviceScaleFactor: 2,
     });
 
     const discoveredDeckIds = await discoverDeckIds(page, baseUrl);
@@ -310,9 +272,6 @@ async function main() {
     }
 
     await mkdir(options.outDir, { recursive: true });
-    const exportImages =
-      options.format === "all" || options.format === "images";
-    const exportPdf = options.format === "all" || options.format === "pdf";
 
     for (const deckId of selectedDeckIds) {
       await page.goto(`${baseUrl}/decks/${deckId}/?slide=1`, {
@@ -322,35 +281,16 @@ async function main() {
       const slideCount = await getSlideCount(page);
 
       const deckOutDir = join(options.outDir, deckId);
-      const imageDir = exportImages
-        ? join(deckOutDir, "images")
-        : join(tmpDir, deckId, "images");
-      const pdfPath = join(deckOutDir, `${deckId}.pdf`);
+      const imageDir = join(deckOutDir, "images");
 
-      if (exportImages || exportPdf) {
-        const imagePaths = await captureSlides({
-          page,
-          baseUrl,
-          deckId,
-          slideCount,
-          imageDir,
-          force: options.force,
-        });
-
-        if (exportPdf) {
-          await mkdir(deckOutDir, { recursive: true });
-          await writePdf({
-            page,
-            pdfPath,
-            imagePaths,
-            force: options.force,
-          });
-        }
-
-        if (!exportImages) {
-          await rm(join(tmpDir, deckId), { recursive: true, force: true });
-        }
-      }
+      await captureSlides({
+        page,
+        baseUrl,
+        deckId,
+        slideCount,
+        imageDir,
+        force: options.force,
+      });
 
       console.log(
         `${deckId}: ${slideCount} slide(s) exported to ${relative(process.cwd(), deckOutDir)}`,
