@@ -12,7 +12,6 @@ Turborepo + pnpm monorepo: a React slide design system, the decks built from it,
 - `apps/player` — Next.js (App Router) presentation app: index page lists decks, `/decks/[id]` plays one. Runtime in `src/player/` (`SlideStage` scale-to-fit, `useDeckNav` keyboard + `?slide=N` deep-link, `Controls`, `Player`). Reuses `@atlantic-community-slides/ui` + `@atlantic-community-slides/decks` (via `transpilePackages`).
 - `packages/eslint-config` — shared ESLint flat configs (`@atlantic-community-slides/eslint-config`): `base`, `react-internal`, `next-js`.
 - `packages/typescript-config` — shared tsconfig bases (`@atlantic-community-slides/typescript-config`): `base`, `react-library`, `nextjs`.
-- `examples/` — reference slide images (the design we match against), not part of the build.
 
 ## Commands (run from the repo root)
 
@@ -31,7 +30,7 @@ All of these go through Turborepo and are cached; scope to one workspace with `p
 
 Screenshot/roast scripts (output to gitignored `screenshots/`):
 
-- `pnpm --filter @atlantic-community-slides/ui screenshots` — builds Storybook and renders every `Components/*` / `Layouts/*` story to a 1280×720 PNG, for review against `examples/`.
+- `pnpm --filter @atlantic-community-slides/ui screenshots` — builds Storybook and renders every `Components/*` / `Layouts/*` story to a 1280×720 PNG, for visual review.
 - `pnpm --filter player shots` (after `pnpm --filter player build`) — boots the built app and captures the player/index chrome states.
 
 ## Conventions
@@ -45,9 +44,9 @@ Screenshot/roast scripts (output to gitignored `screenshots/`):
 ## Slide design system
 
 - **Frame**: every slide renders inside `<Slide>` — a fixed 1280×720 surface with the brand mark, `inverse` (paper) and `padded` options.
-- **Layouts** compose components; they take content as props and own positioning. Match `examples/` for structure/proportion, not pixels.
+- **Layouts** compose components; they take content as props and own positioning. Match the reference design for structure/proportion, not pixels.
 - **Foundations**: `Foundations/Design Tokens` story documents colors, type scale, and spacing.
-- **Review loop**: screenshot the UI (slides via the `@atlantic-community-slides/ui` script against `examples/`; the player chrome via the `player` shots script, open critique with no reference), then get independent feedback from multiple models without context contamination: Claude (read the PNGs directly) and Gemini (`gemini --skip-trust -p "@gen.png <prompt>"` from a dir where the PNGs aren't gitignored, e.g. copied to `/tmp`). Codex is also available (`echo "<prompt>" | codex exec --skip-git-repo-check -s read-only -i gen.png ref.png` — `-i` is variadic, so pass the prompt via stdin). Fix issues 2+ models agree on; treat single-model scale complaints skeptically (they anchor to the references' higher pixel resolution).
+- **Review loop**: screenshot the UI (slides via the `@atlantic-community-slides/ui` screenshots script; the player chrome via the `player` shots script), then get independent feedback from multiple models without context contamination: Claude (read the PNGs directly) and Gemini (`gemini --skip-trust -p "@gen.png <prompt>"` from a dir where the PNGs aren't gitignored, e.g. copied to `/tmp`). Codex is also available (`echo "<prompt>" | codex exec --skip-git-repo-check -s read-only -i gen.png ref.png` — `-i` is variadic, so pass the prompt via stdin). Fix issues 2+ models agree on; treat single-model scale complaints skeptically.
 
 ## Authoring decks (in code)
 

@@ -24,7 +24,6 @@ pnpm storybook    # component/layout workshop → http://localhost:6006
 | `packages/decks`             | `@atlantic-community-slides/decks`             | Deck content (`{ meta, slides[] }`) composed from `@atlantic-community-slides/ui` layouts, plus a registry. |
 | `packages/eslint-config`     | `@atlantic-community-slides/eslint-config`     | Shared ESLint flat configs.                                                                                 |
 | `packages/typescript-config` | `@atlantic-community-slides/typescript-config` | Shared `tsconfig.json` bases.                                                                               |
-| `examples/`                  | —                                              | Reference slide images used as design input; not part of the build.                                         |
 
 ## Scripts
 
