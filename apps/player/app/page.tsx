@@ -49,20 +49,31 @@ export default function Home() {
     >
       <header
         style={{
-          marginBottom: 44,
+          marginBottom: 64,
           display: "flex",
           flexDirection: "column",
+          alignItems: "center",
           gap: 24,
         }}
       >
-        <div style={{ display: "flex", alignItems: "center", gap: 20 }}>
+        <div
+          style={{
+            display: "flex",
+            alignItems: "center",
+            gap: 20,
+            width: "100%",
+            maxWidth: 640,
+          }}
+        >
           <div
             style={{
+              flex: 1,
               fontFamily: fonts.mono,
               fontWeight: 700,
               fontSize: 18,
               lineHeight: 1.3,
               whiteSpace: "pre-line",
+              textAlign: "right",
             }}
           >
             {"The Atlantic\nCommunity"}
@@ -72,27 +83,27 @@ export default function Home() {
               width: 1,
               height: 40,
               background: "rgba(255,255,255,0.2)",
+              flexShrink: 0,
             }}
           />
           <div
             style={{
+              flex: 1,
               color: "rgba(255,255,255,0.6)",
               fontSize: 16,
-              maxWidth: 500,
               lineHeight: 1.5,
             }}
           >
-            This page contains all the slides and presentation decks.
+            Slides
           </div>
         </div>
 
         <div
           style={{
             display: "flex",
-            gap: 24,
-            alignItems: "center",
-            flexWrap: "wrap",
-            marginTop: 24,
+            justifyContent: "center",
+            width: "100%",
+            marginTop: 16,
           }}
         >
           <DeckSearch
@@ -101,8 +112,8 @@ export default function Home() {
             placeholder="Search decks by title, tags, or description..."
             style={{
               flex: 1,
-              minWidth: 280,
-              maxWidth: 400,
+              width: "100%",
+              maxWidth: 520,
               background: "rgba(255,255,255,0.05)",
             }}
           />
